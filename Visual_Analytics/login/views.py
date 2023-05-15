@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from django.contrib.auth import authenticate,login,logout
@@ -97,3 +98,8 @@ def ForgetPassword(request):
 #
 def newpass(request,id):
     return render(request, 'change.html',{'id':id})
+=======
+from django.shortcuts import render
+
+# Create your views here.
+>>>>>>> origin/dev
