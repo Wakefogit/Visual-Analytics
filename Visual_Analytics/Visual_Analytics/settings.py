@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    'login'
+    'login',
+    "dashboard"
 ]
 
 MIDDLEWARE = [
@@ -86,10 +87,10 @@ DATABASES = {
     'default':{
         'ENGINE':'mssql',
         'NAME':'flow',
-        'USER':'',                     # Keep it blank
-        'PASSWORD':'',                 # Keep it blank
+        'USER':'',
+        'PASSWORD':'',
         'HOST':'localhost\SQLEXPRESS',
-        # 'PORT':'',                   # Can be removed
+        # 'PORT':'',
         'OPTIONS': {
             'driver': 'ODBC Driver 17 for SQL Server',
         },
