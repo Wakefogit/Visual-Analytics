@@ -18,7 +18,10 @@ from django.contrib import admin
 from django.urls import path
 from dashboard import views
 urlpatterns = [
-    path("/admin/dashboard/helmet_detection/add/", admin.site.urls),
+
+    path('table/<token1>', views.table),
+    path("admin/", admin.site.urls),
+    path("log/<token>", views.log),
 
 
 ]

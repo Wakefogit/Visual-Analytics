@@ -18,9 +18,10 @@ from django.contrib import admin
 from django.urls import path
 from login import views
 urlpatterns = [
+    path("admin/", admin.site.urls),
     path("", views.home),
-    path("login/", views.login),
-    path("log/", views.log),
+    path("login/<token>", views.login),
+    # path("log/<token>", views.log),
     path("forgot/", views.forgot),
     path("ForgetPassword/", views.ForgetPassword),
     path("newpass/<id>", views.newpass),

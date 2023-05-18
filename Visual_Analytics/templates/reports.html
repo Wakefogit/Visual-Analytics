@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+     <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <meta charset="UTF-8">
+    <title>report</title>
+</head>
+<form method="post">
+<body>
+<div class="data">
+
+    <h1>HELMET DETECTION</h1>
+    {% if table %}
+<div class="table-responsive">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+           <th>Violation_Id </th>
+                <th>Violoation_type </th>
+                <th>time_stamp</th>
+                <th>Camera-number</th>
+                <th>supervisor_remark</th>
+                <th>artefact</th>
+                <th>massage</th>
+        </tr>
+      </thead>
+      <tbody>
+         {% for dashboard in table %}
+            <tr>
+            <td>{{dashboard.violation_id}}</td>
+                <td>{{dashboard.violation_type}}</td>
+                <td>{{dashboard.time_stamp}}</td>
+                <td>{{dashboard.camera_number}}</td>
+                <td> {{dashboard.supervisor_remark}}</td>
+<!--                <td><a href="#" class="view-link" data-toggle="modal" data-target="#imageModal" data-image="{{dashboard.artefact}}">view</a></td>-->
+               <td> <a href="{% static '' %}{{dashboard.artefact}}" target="_blank">view</a></td>
+<!--                <td><img src="{% static '' %}{{dashboard.artefact}}" alt="Image" class="img-thumbnail view-image w-25" data-toggle="modal" data-target="#imageModal" data-image="{{dashboard.artefact}}"></td>-->
+<!--                <td><img src="{% static '' %}{{dashboard.artefact}}" alt="Image"></td>-->
+<!--               <td>{{dashboard.artefact}}</td>-->
+
+                        <td>{{dashboard.message}}</td>
+                            </tr>
+                          </tbody>
+        {% endfor %}
+     </table>
+     </div>
+
+    {% else %}
+    <h1>no record found</h1>
+
+    {% endif %}
+
+
+</div>
+</body>
+</form>
+
+</html>
