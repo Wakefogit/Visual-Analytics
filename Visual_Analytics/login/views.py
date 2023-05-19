@@ -10,6 +10,7 @@ from .email  import send_forget_password_mail
 from django.contrib import messages
 import datetime
 import re
+from .token import generate_token
 
 
 
@@ -19,13 +20,17 @@ dtstamp=x.strftime("%c")
 
 
 def home(request):
-    return render(request,'login.html',{'dt':dtstamp})
+    global token
+    token= generate_token(10)
+    list={'token':token,'dt':dtstamp}
+    return render(request,'login.html',context=list)
 
-def log(request):
+def log(request,token):
+
     return render(request,'dashboard.html')
 
 
-def login(request):
+def login(request,token):
     try:
         if request.method=='POST':
 
@@ -36,7 +41,7 @@ def login(request):
 
             if user is not None:
                 auth_login(request, user)
-                return redirect('/log/')
+                return redirect(f'/log/{token}')
             elif email=="" and ps=="":
                 messages.success(request, 'both field required')
                 return redirect('/')
