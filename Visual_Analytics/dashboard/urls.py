@@ -20,7 +20,6 @@ from dashboard import views
 urlpatterns = [
 
     path('table/<token1>', views.table),
-    path("admin/", admin.site.urls),
     path("log/<token>", views.log),
 
 
