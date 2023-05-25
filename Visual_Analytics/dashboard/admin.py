@@ -4,7 +4,7 @@ from django.contrib import admin
 from django.contrib import admin
 
 # Register your models here.
-from .models import helmet_detection
+from .models import helmet_detection,final_report
 
 
 class productAdmin(admin.ModelAdmin):
@@ -12,6 +12,12 @@ class productAdmin(admin.ModelAdmin):
 
 
 admin.site.register(helmet_detection, productAdmin)
-from django.contrib import admin
+
+
+class report(admin.ModelAdmin):
+    class Meta:
+        model = final_report
+
+admin.site.register(final_report,report)
 
 # Register your models here.

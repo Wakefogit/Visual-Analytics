@@ -1,12 +1,12 @@
 
-from django.shortcuts import render,redirect
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from django.contrib.auth import authenticate,login,logout
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib.auth import login as auth_login
 from django.conf import settings
 from django.core.mail import send_mail
-from .email  import send_forget_password_mail
+from .email import send_forget_password_mail
 from django.contrib import messages
 import datetime
 import re
@@ -58,7 +58,7 @@ def forgot(request):
     return render(request, 'forgot.html')
 
 def ChangePassword(request,id):
-    print(request.method )
+    print(request.method)
 
     try:
 
@@ -105,10 +105,10 @@ def ForgetPassword(request):
             if user==False:
                 messages.success(request, 'Not user found with this username.')
                 return redirect('/forgot/',{'id':id})
-            if super==False:
+            if super == False:
                 messages.success(request, 'access denied')
                 return redirect('/forgot/',{'id':id})
-            if user!=False and super!=False:
+            if user != False and super != False:
                 user_obj = User.objects.get(username=username)
                 send_forget_password_mail(user_obj, id)
                 messages.success(request, 'Mail send to register mail ID')

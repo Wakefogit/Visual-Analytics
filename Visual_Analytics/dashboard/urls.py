@@ -21,6 +21,6 @@ urlpatterns = [
 
     path('table/<token1>', views.table),
     path("log/<token>", views.log),
-
-
+    path("submit/<token1>/<violation_id>", views.submit),
+    path('report/<token1>', views.report),
 ]

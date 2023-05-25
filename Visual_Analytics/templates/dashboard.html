@@ -74,7 +74,7 @@ color: white!important;
     <a class="nav-link active text-left text-dark" data-toggle="tab" href="#dashboard">Dashboard</a>
   </li>
   <li class="nav-item">
-    <button type="submit" class="nav-link text-dark"  formaction="/table/{{token1}}" class="btn btn-theme pl-4 pr-4 mb-5 mt-1" >Reports</button>
+    <button type="submit" class="nav-link text-dark"  formaction="/report/{{token1}}" class="btn btn-theme pl-4 pr-4 mb-5 mt-1" >Reports</button>
 
 
   </li>
@@ -91,21 +91,23 @@ color: white!important;
   
     <!-- dashboard starts here -->
   <div class="tab-pane container-fluid active" id="dashboard">
+
     <div class="card-deck mt-3">
         <div class="card shadow-lg border-0" style="border-radius:10px;background: linear-gradient(105.87deg, #EFE0C5 3.04%, #F2D39E 96.05%);">
           <div class="card-body mt-1 text-center" style="padding: 0px 10px 0px 10px!important;">
+           <a href="/table/{{token1}}"  class="text-dark" style="text-decoration: none;">
             <div class="row">
                 <div class="col-md-3">
 
 
-                <img   src="{% static 'img/helmet.png' %}" width="78">
+                <img   src="{% static 'img/helmet.png' %}" width="78" >
 
                 </div>
                 <div class="col-md-9 text-left">
                     <p class="card-text ml-3">Personal Protective Equipment</p>
-                    <h1 class="ml-3">05</h1>
+                    <h1 class="ml-3">{{max_id}}</h1>
                 </div> 
-            </div>
+            </div></a>
             <div class="row">
                 <div class="col-md-6  text-left">
                 <p>Month - 12</p>

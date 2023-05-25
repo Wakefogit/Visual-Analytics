@@ -25,6 +25,4 @@ urlpatterns = [
     path("ForgetPassword/", views.ForgetPassword),
     path("newpass/<id>", views.newpass),
     path("ChangePassword/<id>", views.ChangePassword),
-
-
 ]
