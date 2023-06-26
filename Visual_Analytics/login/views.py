@@ -14,6 +14,7 @@ from .token import generate_token
 
 
 
+
 x = datetime.datetime.now()
 
 dtstamp=x.strftime("%c")
@@ -25,27 +26,30 @@ def home(request):
     list={'token':token,'dt':dtstamp}
     return render(request,'login.html',context=list)
 
-def log(request,token):
-
-    return render(request,'dashboard.html')
+# def log(request,token):
+#
+#     return render(request,'dashboard.html')
 
 
 def login(request,token):
     try:
         if request.method=='POST':
-
+            global email
             email = request.POST.get('email')
             ps= request.POST.get('password')
             user=authenticate(request,username=email, password=ps)
             valid = User.objects.filter(username=email).exists()
 
             if user is not None:
-                auth_login(request, user)
+                auth_login(request,user)
+                shared_variable = email
+                request.session['shared_variable'] = shared_variable
+
                 return redirect(f'/log/{token}')
             elif email=="" and ps=="":
                 messages.success(request, 'both field required')
                 return redirect('/')
-            elif valid==False:
+            elif valid == False:
                 messages.success(request, 'Not user found with this username.')
                 return redirect('/')
             else:

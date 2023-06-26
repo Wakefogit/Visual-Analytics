@@ -1,18 +1,22 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
-# Create your views here.
+# from ..login.views import *
 from django.db.models import Max
 from functools import reduce
-
+from django.contrib.auth.models import User
+# from login.views import email
 from .models import helmet_detection,final_report
 from .token import generate_token
 
 
 def log(request,token):
     global token1
+
+    shared_variable = request.session.get('shared_variable')
+    username = User.objects.filter(username = shared_variable ).values_list('first_name', flat=True).first()
     max_id = helmet_detection.objects.count()
     token1 = generate_token(10)
-    list = {'token1':token1,"max_id":max_id }
+    list = {'token1':token1,"max_id":max_id ,"username":username}
     return render(request, 'dashboard.html', context=list)
 
 def table(request,token1):
@@ -49,6 +53,3 @@ def report(request,token1):
     print(table)
     list = {"table": table1, 'token1': token1}
     return render(request, "report.html", context=list)
-
-
-
