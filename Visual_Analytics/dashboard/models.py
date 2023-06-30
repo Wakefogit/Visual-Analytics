@@ -24,3 +24,6 @@ class final_report(models.Model):
     supervisor_remark = models.CharField(max_length=50, null=False)
     artefact = models.ImageField(upload_to="result/")
     message = models.CharField(max_length=50, null=False)
+
+
+

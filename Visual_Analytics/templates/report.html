@@ -14,9 +14,24 @@
 
     <title>report</title>
 </head>
-<form method="post">
+<form method="POST">
     {% csrf_token %}
 <body>
+<!--<form method="get">-->
+<!-- <label for="startdate">start date:</label>-->
+<!--  <input type="date" id="startdate" name="startdate">-->
+<!--          <label for="enddate">END date:</label>-->
+<!--  <input type="date" id="enddate" name="enddate">-->
+<!--  <button type="submit" formaction="/filter_report/{{token1}}" class="btn btn-theme pl-4 pr-4 mb-5 mt-1">filter</button>-->
+<!--    </form>-->
+
+  <label for="start_date">Start Date:</label>
+  <input type="date" id="start_date" name="start_date">
+  <label for="end_date">End Date:</label>
+  <input type="date" id="end_date" name="end_date">
+  <button type="submit" formaction="/filter_report/{{token1}}">Filter</button>
+
+
 <div class="data">
 
     <h1>report</h1>
@@ -38,6 +53,7 @@
         </tr>
       </thead>
       <tbody>
+
          {% for dashboard in table %}
             <tr>
             <td>{{dashboard.violation_id}}</td>
@@ -58,6 +74,7 @@
 
     {% endif %}
 
+<button type="submit" formaction="/download/">download</button>
 
 </div>
 <!--<script>-->
@@ -66,6 +83,8 @@
 <!--}, 10000);-->
 <!--</script>-->
 </body>
+
+
 </form>
 
 </html>

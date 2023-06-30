@@ -23,4 +23,9 @@ urlpatterns = [
     path("log/<token>", views.log),
     path("submit/<token1>/<violation_id>", views.submit),
     path('report/<token1>', views.report),
+    path('filter_report/<token1>', views.filter_report),
+    path('download/', views.download_pdf),
+    path('report/<token1>/<start_date>/<end_date>', views.report),
+
+
 ]
