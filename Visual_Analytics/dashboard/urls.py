@@ -19,13 +19,19 @@ from django.urls import path
 from dashboard import views
 urlpatterns = [
 
-    path('table/<token1>', views.table),
+    path('helmet/<token1>', views.helmet),
+    path('Hazard/<token1>', views.Hazard_Protection),
+    path('vehicle/<token1>', views.vehicle),
+    path('Double_billet/<token1>', views.Double_billet),
     path("log/<token>", views.log),
-    path("submit/<token1>/<violation_id>", views.submit),
+    path("submit/<token1>/<violation_id>/<violation_type>", views.submit),
     path('report/<token1>', views.report),
     path('filter_report/<token1>', views.filter_report),
     path('download/', views.download_pdf),
     path('report/<token1>/<start_date>/<end_date>', views.report),
+    # path("log/alert", views.alert),
+    path("user_management/<token1>", views.user_management),
+    path("camera_management/<token1>", views.camera_management),
 
 
 ]

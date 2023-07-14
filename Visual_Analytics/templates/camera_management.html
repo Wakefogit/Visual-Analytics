@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+{% extends 'nav.html' %}
+{% block baseblock  %}
+
+{% load static %}
+<html lang="en">
+<head>
+
+    <title>Visual Analytics | Camera_management </title>
+
+</head>
+
+<body>
+
+  <form method="post">
+    {% csrf_token %}
+   <h3>camera_management</h3>
+  </form>
+</body>
+
+</html>
+
+{% endblock %}
