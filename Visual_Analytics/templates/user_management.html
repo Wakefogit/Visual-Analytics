@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+{% extends 'nav.html' %}
+{% block baseblock  %}
+
+{% load static %}
+<html lang="en">
+<head>
+
+    <title>Visual Analytics | live</title>
+
+</head>
+
+<body>
+  <form method="post">
+    {% csrf_token %}
+   <h3>live</h3>
+
+<!--     <video width="540" height="380" controls>-->
+<!--        <source src="{{ stream_url }}" type="application/x-rtsp">-->
+<!--        Your browser does not support the video tag.-->
+<!--    </video>-->
+  </form>
+</body>
+
+</html>
+
+{% endblock %}
