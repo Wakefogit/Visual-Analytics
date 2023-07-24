@@ -21,10 +21,21 @@ from django.contrib import messages
 
 
 def fetch_last_5_records():
+    all_records = []
+    all_records.extend(helmet_detection.objects.order_by('-time_stamp')[:5])
+    all_records.extend(vehicle_speed.objects.order_by('-time_stamp')[:5])
+    all_records.extend(hazard_protection.objects.order_by('-time_stamp')[:5])
+    all_records.extend(billet.objects.order_by('-time_stamp')[:5])
+
+    # Sorting the records based on time_stamp in descending order
+    sorted_records = sorted(all_records, key=lambda record: record.time_stamp, reverse=True)
+    global last_5_records
+    # Retrieving the last 5 records without loop
+    last_5_records = sorted_records[:5]
 
     # Fetch the last 5 records for violation_type and time_stamp
-    global last_5_records
-    last_5_records = helmet_detection.objects.order_by('-time_stamp').values('violation_type', 'time_stamp')[:5]
+    # global last_5_records
+    # last_5_records = helmet_detection.objects.order_by('-time_stamp').values('violation_type', 'time_stamp')[:5]
 
 
 
@@ -39,9 +50,11 @@ def log(request,token):
     global username
     username = User.objects.filter(username = shared_variable ).values_list('first_name', flat=True).first()
     global max_id
-    max_id = helmet_detection.objects.count()
-    # helmet = helmet_detection.objects.all()
-    # Hazard = Hazard_Protection.objects.all()
+    max_id1 = helmet_detection.objects.count()
+    max_id2 = hazard_protection.objects.count()
+    max_id3 = vehicle_speed.objects.count()
+    max_id4 = billet.objects.count()
+    max_id=[max_id1,max_id2,max_id3,max_id4]
     token1 = generate_token(10)
     list = {'token1':token1,"max_id":max_id ,"username":username ,token:"token","token":t ,"last_5_records":last_5_records ,"active":"active"}
     return render(request, 'dashboard.html', context=list)
@@ -155,21 +168,45 @@ def report(request,token1):
     list = {"table": table, 'token1': token1 , "username":username ,"last_5_records":last_5_records,"token":t,"active1":"active"}
     return render(request, "report.html", context=list)
 
+
+# def filter_table(request,token1):
+#     if request.method == 'POST':
+#         # Get the checkbox values
+#         global violation_types
+#         violation_types = request.POST.getlist('violation_type')
+#         print(violation_types)
+#
+#
+#         if 'All' in violation_types:
+#             table_data = final_report.objects.all()
+#         else:
+#             table_data = final_report.objects.filter(violation_type__in=violation_types)
+#
+#         list = {"table": table_data, 'token1': token1, "username": username, "last_5_records": last_5_records,
+#                 "token": t}
+#         return render(request, "report.html", context=list)
+
 def filter_report(request,token1):
     try:
         if request.method == 'POST':
             global start_date
             global end_date
+            global violation_types
             start_date = request.POST.get('start_date')
             end_date = request.POST.get('end_date')
-            print(start_date,end_date)
+            violation_types = request.POST.getlist('violation_type')
 
             # Filter the report table based on start and end dates
+
             filtered_records = final_report.objects.filter(
                 time_stamp__date__gte=start_date,
-                time_stamp__date__lte=end_date
+                time_stamp__date__lte=end_date,
+                violation_type__in=violation_types
             )
-
+            # filtered_records = final_report.objects.filter(
+            #     time_stamp__date__gte=start_date,
+            #     time_stamp__date__lte=end_date
+            # )
             # filtered_data = final_report.objects.filter(date__range=[start_date, end_date])
             list = {"table": filtered_records , 'token1': token1, "username":username ,"last_5_records":last_5_records,"token":t}
             return render(request, "report.html",context=list)
@@ -184,7 +221,8 @@ def download_pdf(request):
     try:
         data = final_report.objects.filter(
             time_stamp__date__gte=start_date,
-            time_stamp__date__lte=end_date
+            time_stamp__date__lte=end_date,
+            violation_type__in=violation_types
         ).annotate(
             formatted_time_stamp=Cast(Trunc('time_stamp', 'second'), output_field=models.DateTimeField())
         ).values_list(
@@ -263,18 +301,21 @@ def download_pdf(request):
         return HttpResponse ("<H4>start date and end date required</H4>")
 
 
+def live(request, token1):
 
+    rtsp_stream_url = 'rtsp://admin:Admin@1234@192.168.1.64/doc/page/preview.asp'
+    http_stream_url = 'http://127.0.0.1:8080/live'  # Use the desired URL for the converted HTTP stream
 
-def user_management(request,token1):
-    list = {'token1': token1, "username": username, "last_5_records": last_5_records, "token": t,"active3":"active"}
-    return render(request, "user_management.html", context=list)
+    context = {'token1': token1, "username": username, "last_5_records": last_5_records, "token": t, "active3": "active", "rtsp_stream_url": rtsp_stream_url, "http_stream_url": http_stream_url}
+    return render(request, "user_management.html", context=context)
 
+# def user_management(request,token1):
+#     list = {'token1': token1, "username": username, "last_5_records": last_5_records, "token": t,"active4":"active"}
+#     return render(request, "user_management.html", context=list)
 
 def camera_management(request,token1):
     list = {'token1': token1, "username": username, "last_5_records": last_5_records, "token": t,"active2":"active"}
     return render(request, "camera_management.html", context=list)
-
-
 
 
 

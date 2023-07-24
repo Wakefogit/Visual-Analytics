@@ -86,10 +86,10 @@ WSGI_APPLICATION = "Visual_Analytics.wsgi.application"
 DATABASES = {
     'default':{
         'ENGINE':'mssql',
-        'NAME':'flow',
+        'NAME':'wakeflo',
         'USER':'',
         'PASSWORD':'',
-        'HOST':'localhost\SQLEXPRESS',
+        'HOST':'DESKTOP-KJ7P6BI\MSSQLSERVER03',
         # 'PORT':'',
         'OPTIONS': {
             'driver': 'ODBC Driver 17 for SQL Server',

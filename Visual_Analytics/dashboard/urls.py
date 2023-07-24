@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.urls import path
 from dashboard import views
 urlpatterns = [
-
+    # path("admin/", admin.site.urls),
     path('helmet/<token1>', views.helmet),
     path('Hazard/<token1>', views.Hazard_Protection),
     path('vehicle/<token1>', views.vehicle),
@@ -27,11 +27,11 @@ urlpatterns = [
     path("submit/<token1>/<violation_id>/<violation_type>", views.submit),
     path('report/<token1>', views.report),
     path('filter_report/<token1>', views.filter_report),
+    # path('filter_table/<token1>', views.filter_table),
     path('download/', views.download_pdf),
     path('report/<token1>/<start_date>/<end_date>', views.report),
     # path("log/alert", views.alert),
-    path("user_management/<token1>", views.user_management),
+    path("live/<token1>", views.live),
     path("camera_management/<token1>", views.camera_management),
-
 
 ]
