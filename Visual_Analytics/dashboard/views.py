@@ -302,12 +302,14 @@ def download_pdf(request):
 
 
 def live(request, token1):
+        list = {'token1': token1, "username": username, "last_5_records": last_5_records, "token": t,"active4":"active"}
+        return render(request, "user_management.html", context=list)
 
-    rtsp_stream_url = 'rtsp://admin:Admin@1234@192.168.1.64/doc/page/preview.asp'
-    http_stream_url = 'http://127.0.0.1:8080/live'  # Use the desired URL for the converted HTTP stream
+    # rtsp_stream_url = 'rtsp://admin:Admin@1234@192.168.1.64/doc/page/preview.asp'
+    # http_stream_url = 'http://127.0.0.1:8080/live'  # Use the desired URL for the converted HTTP stream
 
-    context = {'token1': token1, "username": username, "last_5_records": last_5_records, "token": t, "active3": "active", "rtsp_stream_url": rtsp_stream_url, "http_stream_url": http_stream_url}
-    return render(request, "user_management.html", context=context)
+    # context = {'token1': token1, "username": username, "last_5_records": last_5_records, "token": t, "active3": "active", "rtsp_stream_url": rtsp_stream_url, "http_stream_url": http_stream_url}
+    # return render(request, "user_management.html", context=context)
 
 # def user_management(request,token1):
 #     list = {'token1': token1, "username": username, "last_5_records": last_5_records, "token": t,"active4":"active"}
