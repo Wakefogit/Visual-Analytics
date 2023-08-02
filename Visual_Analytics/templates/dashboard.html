@@ -5,6 +5,22 @@
 
 <head>
     <title>Visual Analytics | Dashboard </title>
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+<style>
+
+.myChart {
+    width: 100%;
+    max-width: 500px;
+    height: 260px;
+    padding-top: 30px;
+    padding-left: 20px;
+
+}
+.btn-group{
+
+
+}
+</style>
 
 </head>
 <html lang="en">
@@ -150,6 +166,14 @@
   </div>
   <!-- User management ends here -->
 </div>
+
+
+
+
+<div id="myChart" class="myChart">
+
+</div>
+
 </div>
 
 </form>
@@ -159,9 +183,38 @@
 <!--  window.location.reload();-->
 <!--}, 10000);-->
 <!--</script>-->
+<script>
+google.charts.load('current', {'packages':['corechart']});
+google.charts.setOnLoadCallback(drawChart);
 
+function drawChart() {
+
+// Set Data
+const data = google.visualization.arrayToDataTable([
+  ['violation','violation'],
+  ['PPE',{{ max_id.0}}],
+  ['Hazard Protection',{{ max_id.1}}],
+  ['Double Billet',{{ max_id.2}}],
+  ['Vehicle Speed',{{ max_id.3}}],
+
+]);
+
+
+// Set Options
+const options = {
+  title:'Open Violations Record'
+};
+
+// Draw
+const chart = new google.visualization.BarChart(document.getElementById('myChart'));
+chart.draw(data, options);
+
+}
+
+</script>
 </body>
 </html>
+
 {% endblock %}
 
 

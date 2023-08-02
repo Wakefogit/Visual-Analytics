@@ -1,10 +1,7 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
-# from ..login.views import *
-from django.db.models import Max
 from functools import reduce
 from django.contrib.auth.models import User
-# from login.views import email
 from .models import helmet_detection,final_report,hazard_protection,vehicle_speed,billet
 from .token import generate_token
 from django.db import models
@@ -14,8 +11,11 @@ from reportlab.lib.pagesizes import letter
 from reportlab.lib.units import inch
 from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph, Image, Spacer
 from reportlab.lib.styles import getSampleStyleSheet
-from datetime import datetime
 from django.contrib import messages
+from datetime import datetime, timedelta
+from django.db.models import Q
+
+
 
 
 
@@ -33,12 +33,47 @@ def fetch_last_5_records():
     # Retrieving the last 5 records without loop
     last_5_records = sorted_records[:5]
 
-    # Fetch the last 5 records for violation_type and time_stamp
-    # global last_5_records
-    # last_5_records = helmet_detection.objects.order_by('-time_stamp').values('violation_type', 'time_stamp')[:5]
+
+    current_date = datetime.now()
+
+    # Get the start and end dates for the last 7 days (including the current date)
+    start_of_week = current_date - timedelta(days=7)
+    end_of_week = current_date
+
+    # Get the start and end dates for the last 30 days (including the current date)
+    start_of_month = current_date - timedelta(days=30)
+    end_of_month = current_date
+
+    # Calculate the start and end dates for the last 6 months
+    six_months_ago = current_date - timedelta(days=180)
+
+    # Query to get records for each time range and violation type
+    weekly_records = final_report.objects.filter(
+        Q(time_stamp__gte=start_of_week) & Q(time_stamp__lte=end_of_week)
+    )
+    monthly_records = final_report.objects.filter(
+        Q(time_stamp__gte=start_of_month) & Q(time_stamp__lte=end_of_month)
+    )
+    six_monthly_records = final_report.objects.filter(
+        Q(time_stamp__gte=six_months_ago) & Q(time_stamp__lte=current_date)
+    )
+
+    # Filter records based on violation types
+    violation_types = ['NO_helmet', 'hazard_protection', 'Vehicle_Speed', 'double Billet']
+    global weekly_counts
+    weekly_counts = {violation_type: weekly_records.filter(violation_type=violation_type).count() for violation_type in
+                     violation_types}
+    global monthly_counts
+    monthly_counts = {violation_type: monthly_records.filter(violation_type=violation_type).count() for violation_type in
+                      violation_types}
+    global six_monthly_counts
+    six_monthly_counts = {violation_type: six_monthly_records.filter(violation_type=violation_type).count() for
+                          violation_type in violation_types}
 
 
-
+    print("Weekly Counts:", weekly_counts)
+    print("Monthly Counts:", monthly_counts)
+    print("6-Monthly Counts:", six_monthly_counts)
 
 def log(request,token):
 
