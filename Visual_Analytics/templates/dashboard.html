@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+{% extends 'nav.html' %}
+{% block baseblock  %}
+{% load static %}
+
+<head>
+    <title>Visual Analytics | Dashboard </title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<!-- Add Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+
+.myChart {
+    width: 100%;
+    max-width: 500px;
+    height: 260px;
+    padding-top: 30px;
+    padding-left: 20px;
+
+}
+.btn-group{
+
+
+}
+
+
+</style>
+
+</head>
+<html lang="en">
+
+<body>
+<form method="POST">
+    {% csrf_token %}
+
+
+
+<!-- Tab panes -->
+<div class="tab-content" style="height:480px;overflow:auto!important;">
+
+    <!-- dashboard starts here -->
+  <div class="tab-pane container-fluid active" id="dashboard">
+
+    <div class="card-deck mt-3">
+
+        <div class="card shadow-lg border-0" style="border-radius:10px;background: linear-gradient(105.87deg, #EFE0C5 3.04%, #F2D39E 96.05%);">
+          <div class="card-body mt-1 text-center" style="padding: 0px 10px 0px 10px!important;">
+           <a href="/helmet/{{token1}}" class="text-dark" style="text-decoration: none;" >
+            <div class="row">
+                <div class="col-md-3">
+                <img   src="{% static 'img/helmet.png' %}" width="78" >
+
+                </div>
+                <div class="col-md-9 text-left">
+                    <p class="card-text ml-3">Personal Protective Equipment</p>
+                    <h1 class="ml-3">{{ max_id.0}}</h1>
+                </div>
+            </div></a>
+            <div class="row">
+                <div class="col-md-6  text-left">
+                <p>Month - 12</p>
+                </div>
+                <div class="col-md-6  text-right">
+                    <p>Year - 30</p>
+                </div>
+            </div>
+
+          </div>
+        </div>
+
+
+        <div class="card shadow-lg border-0" style="border-radius:10px;background: linear-gradient(105.87deg, #C2EEF7 3.04%, #93B6BD 96.05%);">
+            <div class="card-body mt-1 text-center" style="padding: 0px 10px 0px 10px!important;">
+                <a   href= "/Hazard/{{token1}}"  class="text-dark" style="text-decoration: none;">
+                <div class="row">
+                    <div class="col-md-3">
+
+                    <img src="{% static 'img/workarea.png' %}" width="62">
+
+
+
+                    </div>
+                    <div class="col-md-9 text-left">
+                        <p class="card-text ml-2">Hazard Protection for Employees</p>
+                        <h1 class="ml-2">{{ max_id.1 }}</h1>
+                    </div>
+                </div></a>
+                <div class="row">
+                    <div class="col-md-6  text-left">
+                    <p>Month - 12</p>
+                    </div>
+                    <div class="col-md-6  text-right">
+                        <p>Year - 30</p>
+                    </div>
+                </div>
+
+              </div>
+        </div>
+
+
+        <div class="card shadow-lg border-0" style="border-radius:10px;background: linear-gradient(105.87deg, #B9E8A9 3.04%, #D4F2CC 96.05%);">
+            <div class="card-body mt-1 text-center" style="padding: 0px 10px 0px 10px!important;">
+                 <a   href= "/Double_billet/{{token1}}"  class="text-dark" style="text-decoration: none;">
+                <div class="row">
+                    <div class="col-md-5">
+
+                    <img  src="{% static 'img/billet.png' %}" width="120" height="110">
+
+
+
+                    </div>
+                    <div class="col-md-7 text-left">
+                        <p class="card-text ml-2">Double Billet Operation</p>
+                        <h1 class="ml-2">{{ max_id.2 }}</h1>
+                    </div>
+                </div></a>
+                <div class="row  mt-2">
+                    <div class="col-md-6  text-left">
+                    <p>Month - 12</p>
+                    </div>
+                    <div class="col-md-6  text-right">
+                        <p>Year - 30</p>
+                    </div>
+                </div>
+
+              </div>
+        </div>
+
+
+
+        <div class="card shadow-lg border-0" style="border-radius:10px;background: linear-gradient(105.87deg, #FFA3A3 3.04%, #F1B2D0 96.05%);">
+            <div class="card-body mt-1 text-center" style="padding: 0px 10px 0px 10px!important;">
+                <a   href= "/vehicle/{{token1}}"  class="text-dark" style="text-decoration: none;">
+                <div class="row">
+                    <div class="col-md-5">
+
+                    <img  src="{% static 'img/vehicle.png' %}" width="120" height="110">
+
+
+                    </div>
+                    <div class="col-md-7 text-left">
+                        <p class="card-text ml-2">Vehicle Speed Detection</p>
+                        <h1 class="ml-2">{{ max_id.3 }}</h1>
+                    </div>
+                </div></a>
+                <div class="row mt-2">
+                    <div class="col-md-6  text-left">
+                    <p>Month - 12</p>
+                    </div>
+                    <div class="col-md-6  text-right">
+                        <p>Year - 30</p>
+                    </div>
+                </div>
+
+              </div>
+        </div>
+      </div>
+
+<!--#open violation graph-->
+<div class="row mt-4">
+    <div class="col-md-6">
+        <div id="myChart1" class="myChart">
+
+
+</div>
+    </div>
+
+<!--#graph report -->
+<div class="col-md-6">
+    <ul class="nav nav-pills">
+        <li class="nav-item">
+            <a class="nav-link active" data-toggle="pill" href="#ppe">PPE</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="pill" href="#hazard">Hazard Protection</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link " data-toggle="pill" href="#billet">Double Billet</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="pill" href="#vehicle">Vehicle Speed</a>
+        </li>
+    </ul>
+
+    <div class="tab-content">
+        <div class="tab-pane container active" id="ppe">
+            <div class="container">
+                <canvas id="myChartPPE" width="400" height="200"></canvas>
+            </div>
+        </div>
+        <div class="tab-pane container fade" id="hazard">
+            <div class="container">
+                <canvas id="myChartHazard" width="400" height="200"></canvas>
+            </div>
+        </div>
+        <div class="tab-pane container  fade" id="billet">
+            <div class="container">
+                <canvas id="myChartBillet" width="400" height="200"></canvas>
+            </div>
+        </div>
+        <div class="tab-pane container fade" id="vehicle">
+            <div class="container">
+                <canvas id="myChartVehicle" width="400" height="200"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+  <!-- dashboard ends here -->
+
+  <!-- Camera management ends here -->
+  <div class="tab-pane container fade" id="camera_management">
+    Camera starts
+  </div>
+  <!-- Camera management ends here -->
+
+  <!-- User management ends here -->
+  <div class="tab-pane container fade" id="user_management">
+    User starts
+  </div>
+  <!-- User management ends here -->
+</div>
+
+
+
+
+
+</div>
+
+</div>
+</form>
+
+<script>
+<!--    window.setTimeout( function() {-->
+<!--  window.location.reload();-->
+<!--}, 10000);-->
+</script>
+<script>
+google.charts.load('current', {'packages':['corechart']});
+google.charts.setOnLoadCallback(drawChart);
+
+function drawChart() {
+
+// Set Data
+const data = google.visualization.arrayToDataTable([
+  ['violation','open violation'],
+  ['PPE',{{ max_id.0}}],
+  ['Hazard Protection',{{ max_id.1}}],
+  ['Double Billet',{{ max_id.2}}],
+  ['Vehicle Speed',{{ max_id.3}}],
+
+]);
+
+
+// Set Options
+const options = {
+  title:'Open Violations Record'
+};
+
+// Draw
+const chart = new google.visualization.BarChart(document.getElementById('myChart1'));
+chart.draw(data, options);
+
+}
+
+</script>
+
+
+<!--report graph-->
+<script>
+    const graph = {{ graph }};
+
+    // Extract data for each violation type
+    const ppeData = graph.map(item => item[0]);
+    const hazardData = graph.map(item => item[1]);
+    const billetData = graph.map(item => item[2]);
+    const vehicleData = graph.map(item => item[3]);
+
+    let currentTab = 'ppe'; // Set the default selected tab
+    let myChart = null; // Store the chart instance
+
+    // Add click event listeners to the tab links
+    const tabs = document.querySelectorAll('.nav-link');
+
+    tabs.forEach(tab => {
+        tab.addEventListener('click', function () {
+            const tabId = this.getAttribute('href').substring(1);
+            currentTab = tabId; // Update the current selected tab
+            renderChart();
+        });
+    });
+
+    function renderChart() {
+        let ctx;
+        let data;
+        let options;
+
+        if (currentTab === 'dashboard') {
+            // ... (render Dashboard chart)
+        } else if (currentTab === 'hazard') {
+            // Render the Bar Chart for Hazard
+            ctx = document.getElementById('myChartHazard').getContext('2d');
+            data = {
+                labels: ['Weekly', 'Monthly', '6 Months'],
+                datasets: [
+                    {
+                        label: 'Hazard Protection',
+                        data: hazardData,
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 2,
+                    },
+                ],
+            };
+            options = {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                    },
+                },
+            };
+            // Destroy the previous chart instance to avoid conflicts
+            if (myChart !== null) {
+                myChart.destroy();
+            }
+            // Create the chart
+            myChart = new Chart(ctx, {
+                type: 'bar', // Change the type of chart (bar, line, pie, etc.)
+                data: data,
+                options: options,
+            });
+        } else if (currentTab === 'billet') {
+            // Render the Bar Chart for Billet
+            ctx = document.getElementById('myChartBillet').getContext('2d');
+            data = {
+                labels: ['Weekly', 'Monthly', '6 Months'],
+                datasets: [
+                    {
+                        label: 'Double Billet',
+                        data: billetData,
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 2,
+                    },
+                ],
+            };
+            options = {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                    },
+                },
+            };
+            // Destroy the previous chart instance to avoid conflicts
+            if (myChart !== null) {
+                myChart.destroy();
+            }
+            // Create the chart
+            myChart = new Chart(ctx, {
+                type: 'bar', // Change the type of chart (bar, line, pie, etc.)
+                data: data,
+                options: options,
+            });
+        } else if (currentTab === 'vehicle') {
+            // Render the Bar Chart for Vehicle
+            ctx = document.getElementById('myChartVehicle').getContext('2d');
+            data = {
+                labels: ['Weekly', 'Monthly', '6 Months'],
+                datasets: [
+                    {
+                        label: 'Vehicle Speed',
+                        data: vehicleData,
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 2,
+                    },
+                ],
+            };
+            options = {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                    },
+                },
+            };
+            // Destroy the previous chart instance to avoid conflicts
+            if (myChart !== null) {
+                myChart.destroy();
+            }
+            // Create the chart
+            myChart = new Chart(ctx, {
+                type: 'bar', // Change the type of chart (bar, line, pie, etc.)
+                data: data,
+                options: options,
+            });
+        } else if (currentTab === 'ppe') {
+            // Render the Bar Chart for PPE again (this will re-render it)
+            ctx = document.getElementById('myChartPPE').getContext('2d');
+            data = {
+                labels: ['Weekly', 'Monthly', '6 Months'],
+                datasets: [
+                    {
+                        label: 'PPE',
+                        data: ppeData,
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 2,
+                    },
+                ],
+            };
+            options = {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                    },
+                },
+            };
+            // Destroy the previous chart instance to avoid conflicts
+            if (myChart !== null) {
+                myChart.destroy();
+            }
+            // Create the chart
+            myChart = new Chart(ctx, {
+                type: 'bar', // Change the type of chart (bar, line, pie, etc.)
+                data: data,
+                options: options,
+            });
+        }
+    }
+
+    // Render the chart with default data for PPE on page load
+    renderChart();
+</script>
+</body>
+</html>
+
+{% endblock %}
+
+
