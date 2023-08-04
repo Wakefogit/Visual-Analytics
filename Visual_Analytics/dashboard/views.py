@@ -1,3 +1,5 @@
+''''  dashboard  '''
+
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from functools import reduce
@@ -32,11 +34,6 @@ def fetch_last_5_records():
     global last_5_records
     # Retrieving the last 5 records without loop
     last_5_records = sorted_records[:5]
-
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/dev
     current_date = datetime.now()
 
     # Get the start and end dates for the last 7 days (including the current date)
@@ -63,9 +60,7 @@ def fetch_last_5_records():
 
     # Filter records based on violation types
     violation_types = ['NO_helmet', 'hazard_protection', 'Vehicle_Speed', 'double Billet']
-<<<<<<< HEAD
 
-=======
     global weekly_counts
     weekly_counts = {violation_type: weekly_records.filter(violation_type=violation_type).count() for violation_type in
                      violation_types}
@@ -75,12 +70,11 @@ def fetch_last_5_records():
     global six_monthly_counts
     six_monthly_counts = {violation_type: six_monthly_records.filter(violation_type=violation_type).count() for
                           violation_type in violation_types}
->>>>>>> origin/dev
+
 
     weekly_counts = {violation_type: weekly_records.filter(violation_type=violation_type).count() for violation_type in
                      violation_types}
 
-<<<<<<< HEAD
     monthly_counts = {violation_type: monthly_records.filter(violation_type=violation_type).count() for violation_type in
                       violation_types}
 
@@ -94,11 +88,11 @@ def fetch_last_5_records():
     graph.append(list(six_monthly_counts.values()))
 
     # print(graph)
-=======
-    print("Weekly Counts:", weekly_counts)
-    print("Monthly Counts:", monthly_counts)
-    print("6-Monthly Counts:", six_monthly_counts)
->>>>>>> origin/dev
+
+    # print("Weekly Counts:", weekly_counts)
+    # print("Monthly Counts:", monthly_counts)
+    # print("6-Monthly Counts:", six_monthly_counts)
+    #
 
 def log(request,token):
 

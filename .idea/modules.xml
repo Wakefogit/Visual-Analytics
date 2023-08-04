@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/Visual-Analytics3.iml" filepath="$PROJECT_DIR$/.idea/Visual-Analytics3.iml" />
       <module fileurl="file://$PROJECT_DIR$/../detection/.idea/detection.iml" filepath="$PROJECT_DIR$/../detection/.idea/detection.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/lol.iml" filepath="$PROJECT_DIR$/.idea/lol.iml" />
     </modules>
   </component>
 </project>
