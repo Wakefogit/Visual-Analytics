@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 {% extends 'nav.html' %}
 {% block baseblock  %}
-{% load static %}
 
+{% load static %}
 <html lang="en">
 <head>
 
@@ -14,12 +14,6 @@
   <form method="post">
     {% csrf_token %}
    <h3>live</h3>
-
-<!--     <video width="540" height="380" controls>-->
-<!--        <source src="{{ stream_url }}" type="application/x-rtsp">-->
-<!--        Your browser does not support the video tag.-->
-<!--    </video>-->
-
   </form>
 </body>
 
