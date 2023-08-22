@@ -31,18 +31,16 @@ table {
   width: 100%;
   border-collapse: collapse;
 }
- td {
+<!--
+th, td {
   padding: 8px;
   text-align: left;
   border-bottom: 1px solid #ddd;
-}
-
-th {
-  background-color: #f2f2f2;
-  position: sticky;
-  top: 0;
 
 }
+
+-->
+
 .alert-danger {
     color: #4f4244;
     background-color: #f5cdd1;
@@ -52,7 +50,31 @@ th {
     left: 347px;
 }
 
+th, td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
 
+th {
+ background: #6d3075;
+  position: sticky;
+  top: 0;
+color:white;
+}
+tr{
+white-space: nowrap;
+font-size:14px;
+}
+.btn-purple{
+background: #6d3075;
+}
+td{
+ background: #e4c9ea;
+}
+.table-bordered td, .table-bordered th {
+    border: 1px solid #8a8a8a!important;
+}
 </style>
 <form method="POST">
     {% csrf_token %}
@@ -169,7 +191,7 @@ th {
     {% if table %}
 
 <div class="table-responsive container-fluid" style="    overflow: auto;height: 400px;">
-    <table class="table table-bordered" >
+    <table class="table table-bordered table-color" >
       <thead>
         <tr>
            <th>Violation_Id </th>

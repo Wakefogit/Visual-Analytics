@@ -28,16 +28,15 @@
     }
     .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
     color: white!important;
-    background: linear-gradient(105.87deg, #4D4BB9 3.04%, #2A2FA9 96.05%),
-linear-gradient(0deg, #BAEBD3, #BAEBD3)!important;
+    background: linear-gradient(105.87deg, #934f87 3.04%, #684683 96.05%), linear-gradient(0deg, #BAEBD3, #BAEBD3)!important;
     border-color: #dee2e6 #dee2e6 #fff;
     font-family: 'Unbounded', cursive;
 }
 .nav-tabs .nav-link:focus, .nav-tabs .nav-link:hover {
     isolation: isolate;
     border-color: #e9ecef #e9ecef #dee2e6;
-    background: linear-gradient(105.87deg, #4D4BB9 3.04%, #2A2FA9 96.05%),
-linear-gradient(0deg, #BAEBD3, #BAEBD3)!important;
+       background: linear-gradient(105.87deg, #934f87 3.04%, #684683 96.05%), linear-gradient(0deg, #BAEBD3, #BAEBD3)!important;
+
 color: white!important;
 font-family: 'Unbounded', cursive;
 
@@ -49,6 +48,9 @@ font-weight: 100;
 .bgcolor{
 background-color:#fffff;
 }
+.bg_header{
+background: linear-gradient(45deg, #55265b, #6b3080);
+}
 
 </style>
 </head>
@@ -57,9 +59,9 @@ background-color:#fffff;
 <form method="POST">
     {% csrf_token %}
 
-    <nav class="navbar navbar-expand-md  shadow-sm fixed-top bg-light" style="font-family: 'Unbounded', cursive;!important">
-
-        <a class="navbar-brand" href="#"><img src="{% static 'img/logo.png' %}"   width="160"></a>
+    <nav class="navbar navbar-expand-md  shadow-sm fixed-top bg_header" style="font-family: 'Unbounded', cursive;!important;height:10%">
+        <!-- Brand -->
+        <a class="navbar-brand" href="#"><img src="{% static 'img/logo_white.png' %}" class="img-fluid"  width="140"></a>
 
         <!-- Toggler/collapsibe Button -->
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
@@ -74,8 +76,9 @@ background-color:#fffff;
               </li>
 
               <li class="nav-item dropdown">
-              <a  class="nav-link dropdown-toggle" formaction="/log/alert/{{token}}" id="navbardrop" data-toggle="dropdown">
-                <img src="{% static 'img/alert-notifications 1.gif' %}"  width="50">
+              <a   class="nav-link dropdown-toggle" formaction="/log/alert/{{token}}" id="navbardrop" data-toggle="dropdown">
+<!--                <img src="{% static 'img/alert-notifications 1.gif' %}"  width="50">-->
+                  <i class="fa fa-bell text-white p-2" style="font-size:18px;"></i>
               </a>
               <div class="dropdown-menu dropdown-menu-right" style="width:20em;border-radius:10px;">
                     <ul style="font-size:12px;">
@@ -92,17 +95,17 @@ background-color:#fffff;
 
             </li>
                <li class="nav-item mt-1">
-              <a class="nav-link text-dark">{{username}}</a>
+              <a class="nav-link text-white">{{username}}</a>
             </li>
             <li class="nav-item mt-1">
-              <a class="nav-link text-dark" href="/"><i class="fa fa-sign-out" style="font-size:20px"></i></a>
+              <a class="nav-link text-white" href="/"><i class="fa fa-sign-out" style="font-size:20px"></i></a>
             </li>
           </ul>
         </div>
       </nav>
       <br> <br>
     <!-- tabset list for dashboard,reports,camera and user management -->
-    <div class="container-fluid mt-4">
+    <div class="container-fluid mt-5">
 <ul class="nav nav-tabs">
   <li class="nav-item">
     <button type="submit" class="nav-link text-dark {{active}} myfont"  formaction="/log/{{token}}" class="btn btn-theme pl-4 pr-4 mb-5 mt-1 myfont">Dashboard</button>
@@ -137,3 +140,6 @@ background-color:#fffff;
 </script>
 </body>
 </html>
+
+
+

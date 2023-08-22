@@ -5,33 +5,34 @@
 
 <head>
     <title>Visual Analytics | Dashboard </title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://www.gstatic.com/charts/loader.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
 
 <!-- Add Chart.js -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style>
-
-.myChart {
-    width: 100%;
-    max-width: 500px;
-    height: 260px;
-    padding-top: 30px;
-    padding-left: 20px;
-
+a {
+    color: #000000;
+    text-decoration: none;
+    background-color: transparent;
 }
+
 .btn-group{
 
 
 }
 
-
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    color: #fff;
+    background: linear-gradient(105.87deg, #934f87 3.04%, #684683 96.05%), linear-gradient(0deg, #BAEBD3, #BAEBD3)!important;
+}
 </style>
 
 </head>
@@ -42,7 +43,6 @@
     {% csrf_token %}
 
 
-
 <!-- Tab panes -->
 <div class="tab-content" style="height:480px;overflow:auto!important;">
 
@@ -51,7 +51,7 @@
 
     <div class="card-deck mt-3">
 
-        <div class="card shadow-lg border-0" style="border-radius:10px;background: linear-gradient(105.87deg, #EFE0C5 3.04%, #F2D39E 96.05%);">
+        <div class="card shadow-lg border-0" style="border-radius:10px;background: linear-gradient(105.87deg, #5176a2 3.04%, #95c7ff 96.05%);">
           <div class="card-body mt-1 text-center" style="padding: 0px 10px 0px 10px!important;">
            <a href="/helmet/{{token1}}" class="text-dark" style="text-decoration: none;" >
             <div class="row">
@@ -165,22 +165,23 @@
       </div>
 
 <!--#open violation graph-->
-<div class="row mt-4">
-    <div class="col-md-6">
-        <div id="myChart1" class="myChart">
-
+<!--      <canvas id="myPieChart" width="400" height="400"></canvas>-->
+<div class="row mt-4 ">
+    <div class="col-md-6"  style="height:250px!important;" class="nav-link active">
+<!--        <div id="myChart1">-->
+        <canvas id="myPieChart" width="400" height="100"></canvas>
 
 </div>
-    </div>
+
 
 <!--#graph report -->
-<div class="col-md-6">
+<div class="col-md-6 container" style="height:200px!important;">
     <ul class="nav nav-pills">
         <li class="nav-item">
             <a class="nav-link active" data-toggle="pill" href="#ppe">PPE</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" data-toggle="pill" href="#hazard">Hazard Protection</a>
+            <a class="nav-link " data-toggle="pill" href="#hazard">Hazard Protection</a>
         </li>
         <li class="nav-item">
             <a class="nav-link " data-toggle="pill" href="#billet">Double Billet</a>
@@ -190,7 +191,7 @@
         </li>
     </ul>
 
-    <div class="tab-content">
+    <div class="tab-content" >
         <div class="tab-pane container active" id="ppe">
             <div class="container">
                 <canvas id="myChartPPE" width="400" height="200"></canvas>
@@ -208,16 +209,20 @@
         </div>
         <div class="tab-pane container fade" id="vehicle">
             <div class="container">
-                <canvas id="myChartVehicle" width="400" height="200"></canvas>
+                <canvas id="myChartVehicle" ></canvas>
             </div>
         </div>
     </div>
 </div>
+
+ </div>
+
   <!-- dashboard ends here -->
 
   <!-- Camera management ends here -->
   <div class="tab-pane container fade" id="camera_management">
     Camera starts
+
   </div>
   <!-- Camera management ends here -->
 
@@ -237,41 +242,65 @@
 </div>
 </form>
 
+<!--<script>-->
+<!--&lt;!&ndash;    window.setTimeout( function() {&ndash;&gt;-->
+<!--&lt;!&ndash;  window.location.reload();&ndash;&gt;-->
+<!--&lt;!&ndash;}, 10000);&ndash;&gt;-->
+<!--</script>-->
+
+
+<!--<script>-->
+<!--google.charts.load('current', {'packages':['corechart']});-->
+<!--google.charts.setOnLoadCallback(drawChart);-->
+
+<!--function drawChart() {-->
+
+<!--// Set Data-->
+<!--const data = google.visualization.arrayToDataTable([-->
+<!--  ['violation','open violation'],-->
+<!--  ['PPE',{{ max_id.0}}],-->
+<!--  ['Hazard Protection',{{ max_id.1}}],-->
+<!--  ['Double Billet',{{ max_id.2}}],-->
+<!--  ['Vehicle Speed',{{ max_id.3}}],-->
+
+<!--]);-->
+
+
+<!--// Set Options-->
+<!--const options = {-->
+<!--  title:'Open Violations Record'-->
+<!--};-->
+
+<!--// Draw-->
+<!--const chart = new google.visualization.BarChart(document.getElementById('myChart1'));-->
+<!--chart.draw(data, options);-->
+
+<!--}-->
+
+<!--</script>-->
 <script>
-<!--    window.setTimeout( function() {-->
-<!--  window.location.reload();-->
-<!--}, 10000);-->
-</script>
-<script>
-google.charts.load('current', {'packages':['corechart']});
-google.charts.setOnLoadCallback(drawChart);
+    const data = {
+      labels: ['PPE', 'Hazard Protection', 'Double Billet','Vehicle Speed'],
+      datasets: [{
+        label: "violations",
+        data: [{{ max_id.0}},{{ max_id.1}},{{ max_id.2}},{{ max_id.3}}],
+        backgroundColor: ['rgb(70,130,180)', 'rgb(135,206,235)', 'rgb(152,251,152)','rgb(240,128,128)'],
+        hoverOffset: 4,
+      }],
+    };
 
-function drawChart() {
+    const ctx = document.getElementById('myPieChart').getContext('2d');
 
-// Set Data
-const data = google.visualization.arrayToDataTable([
-  ['violation','open violation'],
-  ['PPE',{{ max_id.0}}],
-  ['Hazard Protection',{{ max_id.1}}],
-  ['Double Billet',{{ max_id.2}}],
-  ['Vehicle Speed',{{ max_id.3}}],
-
-]);
-
-
-// Set Options
-const options = {
-  title:'Open Violations Record'
-};
-
-// Draw
-const chart = new google.visualization.BarChart(document.getElementById('myChart1'));
-chart.draw(data, options);
-
-}
-
-</script>
-
+    new Chart(ctx, {
+      type: 'pie',
+      data: data,
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        // You can add any additional options here
+      },
+    });
+  </script>
 
 <!--report graph-->
 <script>

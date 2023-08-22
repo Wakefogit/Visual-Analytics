@@ -31,8 +31,9 @@ def fetch_last_5_records():
 
     # Sorting the records based on time_stamp in descending order
     sorted_records = sorted(all_records, key=lambda record: record.time_stamp, reverse=True)
-    global last_5_records
+
     # Retrieving the last 5 records without loop
+    global last_5_records
     last_5_records = sorted_records[:5]
     current_date = datetime.now()
 
@@ -95,6 +96,7 @@ def fetch_last_5_records():
     #
 
 def log(request,token):
+
 
     fetch_last_5_records()
     global t
@@ -223,22 +225,7 @@ def report(request,token1):
     return render(request, "report.html", context=list)
 
 
-# def filter_table(request,token1):
-#     if request.method == 'POST':
-#         # Get the checkbox values
-#         global violation_types
-#         violation_types = request.POST.getlist('violation_type')
-#         print(violation_types)
-#
-#
-#         if 'All' in violation_types:
-#             table_data = final_report.objects.all()
-#         else:
-#             table_data = final_report.objects.filter(violation_type__in=violation_types)
-#
-#         list = {"table": table_data, 'token1': token1, "username": username, "last_5_records": last_5_records,
-#                 "token": t}
-#         return render(request, "report.html", context=list)
+
 
 def filter_report(request,token1):
     try:
