@@ -356,9 +356,27 @@ def live(request, token1):
 #     list = {'token1': token1, "username": username, "last_5_records": last_5_records, "token": t,"active4":"active"}
 #     return render(request, "user_management.html", context=list)
 
-def camera_management(request,token1):
-    list = {'token1': token1, "username": username, "last_5_records": last_5_records, "token": t,"active2":"active",'graph':graph}
-    return render(request, "camera_management.html", context=list)
+# def camera_management(request,token1):
+#     list = {'token1': token1, "username": username, "last_5_records": last_5_records, "token": t,"active2":"active",'graph':graph}
+#     return render(request, "camera_management.html", context=list)
+#
 
 
+def camera_management(request, token1):
+    # Your logic to fetch necessary data like 'username', 'last_5_records', 't', 'graph', etc.
 
+    matching_usernames = User.objects.filter(first_name=username).values('username')
+    username_list = [entry['username'] for entry in matching_usernames]
+    is_superuser = User.objects.filter(username=username_list[0]).values_list('is_superuser', flat=True).first()
+
+    context = {
+        'token1': token1,
+        'username': username,
+        'last_5_records': last_5_records,
+        'token': t,
+        'graph': graph,
+        'active2': 'active',
+        'is_superuser': is_superuser,
+    }
+
+    return render(request, "camera_management.html", context)

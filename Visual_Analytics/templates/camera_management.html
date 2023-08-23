@@ -1,23 +1,117 @@
-<!DOCTYPE html>
 {% extends 'nav.html' %}
-{% block baseblock  %}
-
+{% block baseblock %}
 {% load static %}
+
 <html lang="en">
 <head>
-
     <title>Visual Analytics | Camera_management </title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+      }
 
+      .camera-container {
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin-bottom: 10px;
+      }
+
+      .camera-status {
+        font-weight: bold;
+      }
+
+      .camera-button {
+        padding: 5px 10px;
+        margin-right: 10px;
+        cursor: pointer;
+      }
+
+      .camera-status.online {
+        color: green;
+      }
+
+      .camera-status.offline {
+        color: red;
+      }
+       .message-box {
+    border: 1px solid #ccc;
+    padding: 10px;
+    background-color: #f9f9f9;
+    position: relative;
+    margin: 20px;
+  }
+
+  .close-button {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    cursor: pointer;
+  }
+    </style>
 </head>
 
 <body>
+  {% if is_superuser %}
+    <form method="post">
+      {% csrf_token %}
+      <h2>Camera Management</h2>
 
-  <form method="post">
-    {% csrf_token %}
-   <h3>camera_management</h3>
-  </form>
+      <div class="camera-container">
+        <h4>Camera -PS5E1</h4>
+        <p class="camera-status offline" id="camera1Status">Offline</p>
+        <button class="camera-button" type="button" onclick="toggleCameraStatus(1)">Toggle Status</button>
+      </div>
+
+      <div class="camera-container">
+        <h4>Camera -PS5E2</h4>
+        <p class="camera-status online" id="camera2Status">Online</p>
+        <button class="camera-button" type="button" onclick="toggleCameraStatus(2)">Toggle Status</button>
+      </div>
+
+      <div class="camera-container">
+        <h4>Camera -PS5E3</h4>
+        <p class="camera-status offline" id="camera3Status">Offline</p>
+        <button class="camera-button" type="button" onclick="toggleCameraStatus(3)">Toggle Status</button>
+      </div>
+
+      <div class="camera-container">
+        <h4>Camera -PS5E4</h4>
+        <p class="camera-status online" id="camera4Status">Online</p>
+        <button class="camera-button" type="button" onclick="toggleCameraStatus(4)">Toggle Status</button>
+      </div>
+    </form>
+  {% else %}
+    <div class="message-box">
+  <span class="close-button" onclick="closeMessageBox()">&times;</span>
+  <p>This is a simple message box. Click the close button (X) to close it.</p>
+</div>
+
+<script>
+function closeMessageBox() {
+  var messageBox = document.querySelector('.message-box');
+  messageBox.style.display = 'none';
+}
+</script>
+  {% endif %}
+
+  <!-- Rest of your HTML content -->
+  <!-- ... -->
+
+  <script>
+    function toggleCameraStatus(cameraNumber) {
+      var statusElement = document.getElementById('camera' + cameraNumber + 'Status');
+      statusElement.classList.toggle('online');
+      statusElement.classList.toggle('offline');
+
+      if (statusElement.classList.contains('online')) {
+        statusElement.textContent = 'Online';
+      } else {
+        statusElement.textContent = 'Offline';
+      }
+    }
+  </script>
 </body>
-
 </html>
 
 {% endblock %}
