@@ -158,8 +158,9 @@ def submit(request,violation_id,token1,violation_type):
             new_row.save()
             row.delete()
             table = helmet_detection.objects.all()
+            title = "Hemlet Detection"
             list = {"table": table, 'token1': token1, "token": t, "username": username, "helmet": helmet,
-                    "last_5_records": last_5_records}
+                    "last_5_records": last_5_records,"title":"Hemlet Detection"}
             return render(request, "popup.html", context=list)
 
 
@@ -177,7 +178,7 @@ def submit(request,violation_id,token1,violation_type):
             row.delete()
             table = hazard_protection.objects.all()
             list = {"table": table, 'token1': token1, "token": t, "username": username, "helmet": helmet,
-                    "last_5_records": last_5_records}
+                    "last_5_records": last_5_records,"title":"HazardProtection"}
             return render(request, "popup.html", context=list)
         elif violation_type == "Vehicle_Speed":
             vehicle_speed.objects.filter(violation_id=violation_id).update(supervisor_remark=remark, message=msg)
@@ -193,7 +194,7 @@ def submit(request,violation_id,token1,violation_type):
             row.delete()
             table = vehicle_speed.objects.all()
             list = {"table": table, 'token1': token1, "token": t, "username": username, "helmet": helmet,
-                    "last_5_records": last_5_records}
+                    "last_5_records": last_5_records,"title":"Double Billet"}
             return render(request, "popup.html", context=list)
         elif violation_type == "double Billet":
             billet.objects.filter(violation_id=violation_id).update(supervisor_remark=remark, message=msg)
@@ -209,7 +210,7 @@ def submit(request,violation_id,token1,violation_type):
             row.delete()
             table = billet.objects.all()
             list = {"table": table, 'token1': token1, "token": t, "username": username, "helmet": helmet,
-                    "last_5_records": last_5_records,'graph':graph}
+                    "last_5_records": last_5_records,'graph':graph,"title":"Vehicle Speed"}
             return render(request, "popup.html", context=list)
 
 
@@ -220,10 +221,9 @@ def submit(request,violation_id,token1,violation_type):
 
 def report(request,token1):
     fetch_last_5_records()
-    table= final_report.objects.all()
+    table= reversed(final_report.objects.all())
     list = {"table": table, 'token1': token1 , "username":username ,"last_5_records":last_5_records,"token":t,"active1":"active",'graph':graph}
     return render(request, "report.html", context=list)
-
 
 
 
